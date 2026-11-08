@@ -1,0 +1,14 @@
+name: SMT verification
+on: [push, pull_request]
+jobs:
+  solver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Z3
+        run: sudo apt-get update && sudo apt-get install -y z3
+      - name: Verify counterexample is unsat
+        run: |
+          result=$(z3 models/approval.smt2 | tail -n 1)
+          echo "Solver result: $result"
+          test "$result" = "unsat"
