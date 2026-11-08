@@ -1,4 +1,4 @@
-(set-logic QF_BOOL)
+(set-logic QF_UF)
 (declare-const approved Bool)
 (declare-const execute Bool)
 (assert execute)
