@@ -1,0 +1,10 @@
+(set-logic QF_BOOL)
+(declare-const risk_approved Bool)
+(declare-const human_approved Bool)
+(declare-const evaluation_passed Bool)
+(declare-const execute Bool)
+(assert (=> execute (and risk_approved human_approved evaluation_passed)))
+; Negate the invariant: a policy violation must be impossible.
+(assert execute)
+(assert (not (and risk_approved human_approved evaluation_passed)))
+(check-sat)

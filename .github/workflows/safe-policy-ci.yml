@@ -1,0 +1,13 @@
+name: Safe policy proof
+on: [push, pull_request]
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y z3
+      - name: Assert safe-policy counterexample is unsatisfiable
+        run: |
+          output=$(z3 models/safe_approval.smt2)
+          echo "$output"
+          test "$output" = "unsat"
