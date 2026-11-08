@@ -1,3 +1,5 @@
+pub mod verification;
+
 pub fn approved_before_execute(approved: bool, execute: bool) -> bool {
     !execute || approved
 }
