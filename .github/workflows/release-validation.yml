@@ -1,0 +1,12 @@
+name: Release validation
+on: [push, pull_request]
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test
+      - run: sudo apt-get update && sudo apt-get install -y z3
+      - run: test "$(z3 models/approval.smt2 | head -n 1)" = "sat"
+      - run: test "$(z3 models/safe_approval.smt2 | head -n 1)" = "unsat"
