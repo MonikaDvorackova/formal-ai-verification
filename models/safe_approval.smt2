@@ -1,4 +1,4 @@
-(set-logic QF_BOOL)
+(set-logic QF_UF)
 (declare-const risk_approved Bool)
 (declare-const human_approved Bool)
 (declare-const evaluation_passed Bool)
